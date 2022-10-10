@@ -16,8 +16,8 @@ function EventList({
     let eventElements: any[] = [];
     for (const event in events) {
         const eventTimestamp = events[event].getTime();
-        const startTimestamp = new Date(2022, 9, 10).getTime();
-        const endTimestamp = new Date(2022, 9, 11).getTime();
+        const startTimestamp = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()).getTime();
+        const endTimestamp = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() +1).getTime();
         const range = endTimestamp - startTimestamp;
         const eventRelativeOffset = (eventTimestamp - startTimestamp)/range;
         eventElements.push({
