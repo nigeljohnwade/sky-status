@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+body{
+    margin: 1rem;
+}
+
 .event-list-wrapper{
     width :100%;
     overflow-x: scroll;
@@ -69,4 +73,10 @@ ol.event-list.sun{
 .data-list .item-field {
     display: inline-block;
     width: 20ch;
+}
+
+.data-list .item-value {
+    display: inline-block;
+    width: 10ch;
+    text-align: right;
 }
