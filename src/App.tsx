@@ -2,50 +2,77 @@ import React from 'react';
 import suncalc from 'suncalc';
 import './App.css';
 import { useTranslation } from 'react-i18next';
-import { radiansToDegrees } from './utilities';
+import {
+    isBoolean,
+    isRadians,
+    radiansToDegrees,
+} from './utilities';
 
-function Times({
-    times,
+function EventList({
+    times: events,
 }) {
     const {t} = useTranslation();
-    let timeElements: any[] = [];
-    for (const time in times) {
-        const timestamp = times[time].getTime();
-        timeElements.push({
-            timestamp: timestamp,
-            element: <li key={time}>
+    let eventElements: any[] = [];
+    for (const event in events) {
+        const eventTimestamp = events[event].getTime();
+        const startTimestamp = new Date(2022, 9, 10).getTime();
+        const endTimestamp = new Date(2022, 9, 11).getTime();
+        const range = endTimestamp - startTimestamp;
+        const eventRelativeOffset = (eventTimestamp - startTimestamp)/range;
+        eventElements.push({
+            eventTimestamp,
+            element: <li
+                style={{
+                    position: 'absolute',
+                    left: `${eventRelativeOffset * 100}%`
+                }}
+                key={event}
+                className={event}
+            >
                 <p>
-                    <span className={'item-field'}>{t(time)}</span>
-                    <span className={'item-value'}>{times[time].toLocaleTimeString()}</span>
+                    <span className={'item-field'}>{t(event)}</span>
+                    <span className={'item-value event-time'}>{events[event].toLocaleTimeString()}</span>
                 </p>
             </li>
         });
     }
-    return <ol>
+    return <ol style={{position: "relative"}}>
         {
-            timeElements.sort((a, b) => a.timestamp - b.timestamp).map(item => item.element)
+            eventElements.sort((a, b) => a.eventTimestamp - b.eventTimestamp).map(item => item.element)
         }
     </ol>;
 }
 
-function Position({
-    positions,
+function DataList({
+    accuracy = 3,
+    dataItems,
 }) {
     const {t} = useTranslation();
-    let positionElements: any[] = [];
-    for (const position in positions) {
-        positionElements.push(
-            <div key={position}>
+    let dataItemElements: any[] = [];
+    for (const dataItem in dataItems) {
+        (!isBoolean(dataItem) && isRadians(dataItem))
+        ?
+        dataItemElements.push(
+            <div key={dataItem}>
                 <p>
-                    <span className={'item-field'}> {t(position)}</span>
-                    <span className={'item-value'}>{radiansToDegrees(positions[position]).toFixed(2)}</span>
+                    <span className={'item-field'}> {t(dataItem)}</span>
+                    <span className={'item-value'}>{radiansToDegrees(dataItems[dataItem]).toFixed(accuracy)}</span>
                 </p>
             </div>
-        );
+        )
+        :
+        dataItemElements.push(
+            <div key={dataItem}>
+                <p>
+                    <span className={'item-field'}> {t(dataItem)}</span>
+                    <span className={'item-value'}>{dataItems[dataItem].toFixed(accuracy)}</span>
+                </p>
+            </div>
+        )
     }
     return <div>
         {
-            positionElements.map(element => element)
+            dataItemElements.map(element => element)
         }
     </div>;
 }
@@ -53,11 +80,11 @@ function Position({
 function App() {
     return (
         <div className="App">
-            <Times times={suncalc.getTimes(new Date(), 51.5, -0.1)}/>
-            <Position positions={suncalc.getPosition(new Date(), 51.5, -0.1)}/>
-            <Position positions={suncalc.getMoonPosition(new Date(), 51.5, -0.1)}/>
-            <Position positions={suncalc.getMoonIllumination(new Date(), 51.5, -0.1)}/>
-            <Times times={suncalc.getMoonTimes(new Date(), 51.5, -0.1)}/>
+            <EventList times={suncalc.getTimes(new Date(), 51.5, -0.1)}/>
+            <EventList times={suncalc.getMoonTimes(new Date(), 51.5, -0.1)}/>
+            <DataList dataItems={suncalc.getPosition(new Date(), 51.5, -0.1)}/>
+            <DataList dataItems={suncalc.getMoonPosition(new Date(), 51.5, -0.1)}/>
+            <DataList dataItems={suncalc.getMoonIllumination(new Date(), 51.5, -0.1)}/>
         </div>
     );
 }

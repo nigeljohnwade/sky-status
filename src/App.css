@@ -1,0 +1,32 @@
+ol{
+    height: 9rem;
+    border: 1px solid black;
+}
+
+.night, .nightEnd {
+    top: 5rem;
+}
+
+.nauticalDawn, .nauticalDusk {
+    top: 4rem;
+}
+
+.dawn, .dusk {
+    top: 3rem;
+}
+
+.sunrise, .sunset {
+    top: 2rem;
+}
+
+.sunriseEnd, .sunsetStart{
+    top: 1rem;
+}
+
+.nadir, .solarNoon{
+    top: 0;
+ }
+
+ .goldenHourEnd, .goldenHour{
+     top: 6rem;
+ }
