@@ -1,6 +1,22 @@
-ol{
-    height: 9rem;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ol.event-list {
+    position: relative;
+    list-style-type: none;
+    height: 2rem;
     border: 1px solid black;
+}
+
+ol.event-list.sun{
+    height: 8rem;
+}
+
+.event-list + .event-list{
+    border-top: none;
 }
 
 .night, .nightEnd {
@@ -19,14 +35,19 @@ ol{
     top: 2rem;
 }
 
-.sunriseEnd, .sunsetStart{
+.sunriseEnd, .sunsetStart {
     top: 1rem;
 }
 
-.nadir, .solarNoon{
+.nadir, .solarNoon {
     top: 0;
- }
+}
 
- .goldenHourEnd, .goldenHour{
-     top: 6rem;
- }
+.goldenHourEnd, .goldenHour {
+    top: 6rem;
+}
+
+.data-list .item-field {
+    display: inline-block;
+    width: 20ch
+}

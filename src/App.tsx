@@ -9,7 +9,8 @@ import {
 } from './utilities';
 
 function EventList({
-    times: events,
+    events,
+    type,
 }) {
     const {t} = useTranslation();
     let eventElements: any[] = [];
@@ -29,14 +30,14 @@ function EventList({
                 key={event}
                 className={event}
             >
-                <p>
+                <p title={t(`${event}Tooltip`)}>
                     <span className={'item-field'}>{t(event)}</span>
                     <span className={'item-value event-time'}>{events[event].toLocaleTimeString()}</span>
                 </p>
             </li>
         });
     }
-    return <ol style={{position: "relative"}}>
+    return <ol className={`event-list ${type}`}>
         {
             eventElements.sort((a, b) => a.eventTimestamp - b.eventTimestamp).map(item => item.element)
         }
@@ -70,7 +71,7 @@ function DataList({
             </div>
         )
     }
-    return <div>
+    return <div className={'data-list'}>
         {
             dataItemElements.map(element => element)
         }
@@ -80,8 +81,8 @@ function DataList({
 function App() {
     return (
         <div className="App">
-            <EventList times={suncalc.getTimes(new Date(), 51.5, -0.1)}/>
-            <EventList times={suncalc.getMoonTimes(new Date(), 51.5, -0.1)}/>
+            <EventList type="sun" events={suncalc.getTimes(new Date(), 51.5, -0.1)}/>
+            <EventList type="moon" events={suncalc.getMoonTimes(new Date(), 51.5, -0.1)}/>
             <DataList dataItems={suncalc.getPosition(new Date(), 51.5, -0.1)}/>
             <DataList dataItems={suncalc.getMoonPosition(new Date(), 51.5, -0.1)}/>
             <DataList dataItems={suncalc.getMoonIllumination(new Date(), 51.5, -0.1)}/>
