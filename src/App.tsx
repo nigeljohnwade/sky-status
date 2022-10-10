@@ -17,9 +17,9 @@ function EventList({
     for (const event in events) {
         const eventTimestamp = events[event].getTime();
         const startTimestamp = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()).getTime();
-        const endTimestamp = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() +1).getTime();
+        const endTimestamp = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + 1).getTime();
         const range = endTimestamp - startTimestamp;
-        const eventRelativeOffset = (eventTimestamp - startTimestamp)/range;
+        const eventRelativeOffset = (eventTimestamp - startTimestamp) / range;
         eventElements.push({
             eventTimestamp,
             element: <li
@@ -47,31 +47,33 @@ function EventList({
 function DataList({
     accuracy = 3,
     dataItems,
+    title,
 }) {
     const {t} = useTranslation();
     let dataItemElements: any[] = [];
     for (const dataItem in dataItems) {
         (!isBoolean(dataItem) && isRadians(dataItem))
-        ?
-        dataItemElements.push(
-            <div key={dataItem}>
-                <p>
-                    <span className={'item-field'}> {t(dataItem)}</span>
-                    <span className={'item-value'}>{radiansToDegrees(dataItems[dataItem]).toFixed(accuracy)}</span>
-                </p>
-            </div>
-        )
-        :
-        dataItemElements.push(
-            <div key={dataItem}>
-                <p>
-                    <span className={'item-field'}> {t(dataItem)}</span>
-                    <span className={'item-value'}>{dataItems[dataItem].toFixed(accuracy)}</span>
-                </p>
-            </div>
-        )
+            ?
+            dataItemElements.push(
+                <div key={dataItem}>
+                    <p>
+                        <span className={'item-field'}> {t(dataItem)}</span>
+                        <span className={'item-value'}>{radiansToDegrees(dataItems[dataItem]).toFixed(accuracy)}</span>
+                    </p>
+                </div>
+            )
+            :
+            dataItemElements.push(
+                <div key={dataItem}>
+                    <p>
+                        <span className={'item-field'}> {t(dataItem)}</span>
+                        <span className={'item-value'}>{dataItems[dataItem].toFixed(accuracy)}</span>
+                    </p>
+                </div>
+            );
     }
     return <div className={'data-list'}>
+        <h2>{title}</h2>
         {
             dataItemElements.map(element => element)
         }
@@ -81,11 +83,30 @@ function DataList({
 function App() {
     return (
         <div className="App">
-            <EventList type="sun" events={suncalc.getTimes(new Date(), 51.5, -0.1)}/>
-            <EventList type="moon" events={suncalc.getMoonTimes(new Date(), 51.5, -0.1)}/>
-            <DataList dataItems={suncalc.getPosition(new Date(), 51.5, -0.1)}/>
-            <DataList dataItems={suncalc.getMoonPosition(new Date(), 51.5, -0.1)}/>
-            <DataList dataItems={suncalc.getMoonIllumination(new Date(), 51.5, -0.1)}/>
+            <div className={'event-list-wrapper'}>
+                <EventList
+                    type="sun"
+                    events={suncalc.getTimes(new Date(), 51.5, -0.1)}
+                />
+                <EventList
+                    type="moon"
+                    events={suncalc.getMoonTimes(new Date(), 51.5, -0.1)}
+                />
+            </div>
+            <div className={'data-list-wrapper'}>
+                <DataList
+                    title="Sun Position"
+                    dataItems={suncalc.getPosition(new Date(), 51.5, -0.1)}
+                />
+                <DataList
+                    title="Moon Position"
+                    dataItems={suncalc.getMoonPosition(new Date(), 51.5, -0.1)}
+                />
+                <DataList
+                    title="Moon Illumination"
+                    dataItems={suncalc.getMoonIllumination(new Date(), 51.5, -0.1)}
+                />
+            </div>
         </div>
     );
 }

@@ -4,6 +4,15 @@
     box-sizing: border-box;
 }
 
+.event-list-wrapper{
+    width :100%;
+    overflow-x: scroll;
+}
+
+.event-list{
+    min-width: 200ch;
+}
+
 ol.event-list {
     position: relative;
     list-style-type: none;
@@ -47,7 +56,17 @@ ol.event-list.sun{
     top: 6rem;
 }
 
+.data-list-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.data-list{
+    flex-basis: 30ch;
+}
+
 .data-list .item-field {
     display: inline-block;
-    width: 20ch
+    width: 20ch;
 }
