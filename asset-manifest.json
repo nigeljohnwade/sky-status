@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/sky-status/static/css/main.930e6eba.css",
+    "main.js": "/sky-status/static/js/main.2dc94c9f.js",
+    "static/js/787.a9374f5e.chunk.js": "/sky-status/static/js/787.a9374f5e.chunk.js",
+    "index.html": "/sky-status/index.html",
+    "main.930e6eba.css.map": "/sky-status/static/css/main.930e6eba.css.map",
+    "main.2dc94c9f.js.map": "/sky-status/static/js/main.2dc94c9f.js.map",
+    "787.a9374f5e.chunk.js.map": "/sky-status/static/js/787.a9374f5e.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.930e6eba.css",
+    "static/js/main.2dc94c9f.js"
+  ]
+}
