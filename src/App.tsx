@@ -1,4 +1,6 @@
-import React from 'react';
+import React, {
+    useState,
+} from 'react';
 import suncalc from 'suncalc';
 import './App.css';
 import { useTranslation } from 'react-i18next';
@@ -9,6 +11,7 @@ import {
 } from './utilities';
 
 function EventList({
+    date = new Date(),
     events,
     type,
 }) {
@@ -16,8 +19,8 @@ function EventList({
     let eventElements: any[] = [];
     for (const event in events) {
         const eventTimestamp = events[event].getTime();
-        const startTimestamp = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate()).getTime();
-        const endTimestamp = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + 1).getTime();
+        const startTimestamp = new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime();
+        const endTimestamp = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1).getTime();
         const range = endTimestamp - startTimestamp;
         const eventRelativeOffset = (eventTimestamp - startTimestamp) / range;
         eventElements.push({
@@ -81,32 +84,38 @@ function DataList({
 }
 
 function App() {
+    const [date, setDate] = useState(new Date());
     return (
         <div className="App">
             <div className={'event-list-wrapper'}>
                 <EventList
+                    date={date}
                     type="sun"
-                    events={suncalc.getTimes(new Date(), 51.5, -0.1)}
+                    events={suncalc.getTimes(date, 51.5, -0.1)}
                 />
                 <EventList
                     type="moon"
-                    events={suncalc.getMoonTimes(new Date(), 51.5, -0.1)}
+                    events={suncalc.getMoonTimes(date, 51.5, -0.1)}
                 />
             </div>
             <div className={'data-list-wrapper'}>
                 <DataList
                     title="Sun Position"
-                    dataItems={suncalc.getPosition(new Date(), 51.5, -0.1)}
+                    dataItems={suncalc.getPosition(date, 51.5, -0.1)}
                 />
                 <DataList
                     title="Moon Position"
-                    dataItems={suncalc.getMoonPosition(new Date(), 51.5, -0.1)}
+                    dataItems={suncalc.getMoonPosition(date, 51.5, -0.1)}
                 />
                 <DataList
                     title="Moon Illumination"
-                    dataItems={suncalc.getMoonIllumination(new Date(), 51.5, -0.1)}
+                    dataItems={suncalc.getMoonIllumination(date, 51.5, -0.1)}
                 />
             </div>
+            <input type="date" onChange={(event) => {
+                // @ts-ignore
+                setDate(new Date(event.target.value));
+            }}/>
         </div>
     );
 }
