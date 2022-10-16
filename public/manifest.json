@@ -1,6 +1,7 @@
 {
   "short_name": "Sky Status",
   "name": "Sky Status",
+  "id": "/sky-status/",
   "icons": [
     {
       "src": "android-icon-36x36.png",
