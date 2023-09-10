@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/sky-status/static/css/main.930e6eba.css",
-    "main.js": "/sky-status/static/js/main.79d790d7.js",
+    "main.css": "/sky-status/static/css/main.20887d0c.css",
+    "main.js": "/sky-status/static/js/main.a79a4140.js",
     "static/js/787.a9374f5e.chunk.js": "/sky-status/static/js/787.a9374f5e.chunk.js",
     "service-worker.js": "/sky-status/service-worker.js",
     "index.html": "/sky-status/index.html",
-    "main.930e6eba.css.map": "/sky-status/static/css/main.930e6eba.css.map",
-    "main.79d790d7.js.map": "/sky-status/static/js/main.79d790d7.js.map",
+    "main.20887d0c.css.map": "/sky-status/static/css/main.20887d0c.css.map",
+    "main.a79a4140.js.map": "/sky-status/static/js/main.a79a4140.js.map",
     "787.a9374f5e.chunk.js.map": "/sky-status/static/js/787.a9374f5e.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.930e6eba.css",
-    "static/js/main.79d790d7.js"
+    "static/css/main.20887d0c.css",
+    "static/js/main.a79a4140.js"
   ]
 }
