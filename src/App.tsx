@@ -1,4 +1,5 @@
 import React, {
+    useEffect,
     useState,
 } from 'react';
 import suncalc from 'suncalc';
@@ -14,6 +15,10 @@ function EventList({
     date = new Date(),
     events,
     type,
+}:{
+    date: Date,
+    events: any,
+    type: any,
 }) {
     const {t} = useTranslation();
     let eventElements: any[] = [];
@@ -51,6 +56,10 @@ function DataList({
     accuracy = 3,
     dataItems,
     title,
+}:{
+    accuracy?: number,
+    dataItems: any,
+    title: any,
 }) {
     const {t} = useTranslation();
     let dataItemElements: any[] = [];
@@ -85,6 +94,9 @@ function DataList({
 
 function App() {
     const [date, setDate] = useState(new Date());
+    useEffect(() => {
+        console.log(date);
+    }, [date])
     return (
         <div className="App">
             <div className={'event-list-wrapper'}>
@@ -94,6 +106,7 @@ function App() {
                     events={suncalc.getTimes(date, 51.5, -0.1)}
                 />
                 <EventList
+                    date={date}
                     type="moon"
                     events={suncalc.getMoonTimes(date, 51.5, -0.1)}
                 />
@@ -109,12 +122,11 @@ function App() {
                 />
                 <DataList
                     title="Moon Illumination"
-                    dataItems={suncalc.getMoonIllumination(date, 51.5, -0.1)}
+                    dataItems={suncalc.getMoonIllumination(date)}
                 />
             </div>
             <input type="date" onChange={(event) => {
-                // @ts-ignore
-                setDate(new Date(event.target.value));
+                setDate(new Date(`${event.target.value}T12:00:00.00Z`));
             }}/>
         </div>
     );
