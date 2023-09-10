@@ -26,6 +26,12 @@ ol.event-list {
 
 ol.event-list.sun{
     height: 8rem;
+    background-color: hsl(30deg 25% 80%);
+}
+
+ol.event-list.moon {
+    background-color: hsl(240deg 25% 20%);
+    color: hsl(240deg 75% 90%)
 }
 
 .event-list + .event-list{
