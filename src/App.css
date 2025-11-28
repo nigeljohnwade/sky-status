@@ -10,11 +10,11 @@ body{
 
 .event-list-wrapper{
     width :100%;
-    overflow-x: scroll;
+    overflow-x: hidden;
 }
 
 .event-list{
-    min-width: 200ch;
+    /*min-width: 200ch;*/
 }
 
 ol.event-list {
